@@ -5,12 +5,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=v2rayA
-PKG_VERSION:=2.2.7.4
+PKG_VERSION:=2.5.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/v2rayA/v2rayA/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=801a5488493cef8c2603d596e5982d226c07ad8f4a2969d942922be79169ec29
+PKG_HASH:=f5d5ad97baf7b7e9ef11e72495881d5de7397cdca14a08fa97186d3a30a4c2f1
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)/service
 
 PKG_LICENSE:=AGPL-3.0-only
@@ -24,7 +24,7 @@ PKG_BUILD_FLAGS:=no-mips16
 GO_PKG:=github.com/v2rayA/v2rayA
 GO_PKG_LDFLAGS_X:= \
 	$(GO_PKG)/conf.Version=$(PKG_VERSION) \
-	$(GO_PKG)/core/iptables.TproxyNotSkipBr=true
+	$(GO_PKG)/kernel/iptables.TproxyNotSkipBr=true
 
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
@@ -37,13 +37,14 @@ define Package/v2raya
   SECTION:=net
   CATEGORY:=Network
   SUBMENU:=Web Servers/Proxies
-  DEPENDS:=$(GO_ARCH_DEPENDS) +ca-bundle
-  URL:=https://v2raya.org
+  DEPENDS:=$(GO_ARCH_DEPENDS) +v2raya-core +ca-bundle
+  URL:=https://github.com/v2rayA/v2rayA
 endef
 
 define Package/v2raya/description
-  v2rayA is a V2Ray Linux client supporting global transparent proxy,
-  compatible with SS, SSR, Trojan(trojan-go), PingTunnel protocols.
+  v2rayA is a web client for its own Xray-based core with transparent
+  proxy; it speaks VMess, VLESS, Shadowsocks, Trojan, Hysteria2, TUIC,
+  Juicity, AnyTLS, WireGuard, SOCKS5 and HTTP(S).
 endef
 
 define Package/v2raya/conffiles
@@ -56,11 +57,12 @@ define Download/v2raya-web
 	URL:=https://github.com/v2rayA/v2rayA/releases/download/v$(PKG_VERSION)/
 	URL_FILE:=web.tar.gz
 	FILE:=$(WEB_FILE)
-	HASH:=985b083a75b7b34ea9c5151cbc096f6f44fa369a807fea85b435fed5229dae65
+	HASH:=88d11704cef3257bcefd65db938d42aa3d1fe1da230d79317c3f573073e262cc
 endef
 
 GO_PKG_TARGET_VARS:=$(filter-out CGO_ENABLED=%,$(GO_PKG_TARGET_VARS)) CGO_ENABLED=0
 GO_PKG_DEFAULT_LDFLAGS:=$(filter-out -linkmode external,$(GO_PKG_DEFAULT_LDFLAGS))
+GO_PKG_BUILD_VARS:=$(filter-out GOTOOLCHAIN=%,$(GO_PKG_BUILD_VARS)) GOTOOLCHAIN=go1.26.0+auto
 
 define Build/Prepare
 	$(call Build/Prepare/Default)

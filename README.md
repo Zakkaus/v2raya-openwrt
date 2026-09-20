@@ -43,15 +43,13 @@ opkg feed of v2rayA for OpenWrt users.
      iptables-mod-tproxy \
      kmod-ipt-nat6
 
-   # Choose a core you'd like to use, v2ray or Xray
-   # If you have both installed, the latter is preferred by default
-   #
-   # Note from maintainer: due to broken tproxy support in v2ray, recommend using Xray instead
-   opkg install xray-core
-   # opkg install v2ray-core
+   # v2raya-core, the core of the same version, is installed with it
 
-   # Optional
-   # opkg install v2fly-geoip v2fly-geosite
+   # tun mode
+   opkg install kmod-tun
+
+   # Rule data; without it v2rayA downloads geoip.dat and geosite.dat from GitHub on first start
+   opkg install v2fly-geoip v2fly-geosite
    ```
 
 ## How to use
