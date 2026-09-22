@@ -5,12 +5,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=v2raya-core
-PKG_VERSION:=2.5.1
+PKG_VERSION:=2.5.5
 PKG_RELEASE:=1
 
 PKG_SOURCE:=v2rayA-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/v2rayA/v2rayA/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=f5d5ad97baf7b7e9ef11e72495881d5de7397cdca14a08fa97186d3a30a4c2f1
+PKG_HASH:=1c827bbafffeef1c43aea153877c184f40af5dc6871646bf85215f0b0086570b
 PKG_BUILD_DIR:=$(BUILD_DIR)/v2rayA-$(PKG_VERSION)/core
 
 PKG_LICENSE:=MPL-2.0
