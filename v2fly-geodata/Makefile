@@ -41,14 +41,14 @@ endef
 define Package/v2fly-geoip
   $(call Package/v2fly-geodata/template)
   TITLE+= (geoip)
-  VERSION:=$(GEOIP_VER)-$(PKG_RELEASE)
+  VERSION:=$(GEOIP_VER)-r$(PKG_RELEASE)
   LICENSE:=CC-BY-SA-4.0
 endef
 
 define Package/v2fly-geosite
   $(call Package/v2fly-geodata/template)
   TITLE+= (geosite)
-  VERSION:=$(GEOSITE_VER)-$(PKG_RELEASE)
+  VERSION:=$(GEOSITE_VER)-r$(PKG_RELEASE)
   LICENSE:=MIT
 endef
 
